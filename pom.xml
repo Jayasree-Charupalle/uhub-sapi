@@ -36,6 +36,32 @@
 							<artifactId>mysql-connector-java</artifactId>
 						</sharedLibrary>
 					</sharedLibraries>
+					
+
+        <cloudHubDeployment>
+            <uri>https://anypoint.mulesoft.com</uri> 
+            <muleVersion>${app.runtime}</muleVersion> 
+            <username>realtimeproject-jay</username> 
+            <password>Jayasree@208</password> 
+            <applicationName>uhub-sapi</applicationName>
+            <environment>Sandbox</environment> 
+            <region>us-east-2</region>
+            <objectStoreV2>true</objectStoreV2> 
+            <workers>1</workers>
+            <workerType>micro</workerType> 
+
+        </cloudHubDeployment>
+            <executions>
+                                <execution>
+                                    <id>deploy</id>
+                                    <phase>deploy</phase>
+                                    <goals>
+                                        <goal>deploy</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                <classifier>mule-application</classifier>
+     
 				</configuration>
 			</plugin>
 		</plugins>
@@ -105,32 +131,4 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
-
-	
-<configuration>
-        <cloudHubDeployment>
-            <uri>https://anypoint.mulesoft.com</uri> 
-            <muleVersion>${app.runtime}</muleVersion> 
-            <username>realtimeproject-jay</username> 
-            <password>Jayasree@208</password> 
-            <applicationName>uhub-sapi</applicationName>
-            <environment>Sandbox</environment> 
-            <region>us-east-2</region>
-            <objectStoreV2>true</objectStoreV2> 
-            <workers>1</workers>
-            <workerType>micro</workerType> 
-
-        </cloudHubDeployment>
-            <executions>
-                                <execution>
-                                    <id>deploy</id>
-                                    <phase>deploy</phase>
-                                    <goals>
-                                        <goal>deploy</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                <classifier>mule-application</classifier>
-     </configuration>
 </project>

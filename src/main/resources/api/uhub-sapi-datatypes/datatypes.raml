@@ -1,0 +1,187 @@
+#%RAML 1.0 Library
+usage: datatypes for uhub-sapi
+
+types:
+  covid-case-request-datatypes:
+    type: object
+    description: this type is used to register and update the covid case
+    properties:
+      source:
+        type: string
+        required: true
+        example: "The johns hopkins hospital"
+      caseType:
+        type: string
+        required: true
+        example: "positive"
+      firstName:
+        type: string
+        required: true
+        example: "john"
+      lastName:
+        type: string
+        required: true
+        example: "nixon"
+      phone:
+        type: string
+        required: true
+        example: "9398267202"
+      email:
+        type: string
+        required: false
+        example: "jayasree@auropro.com"
+      dateOfBirth:
+        type: date-only
+        required: true
+        example: "2001-02-21"
+      nationalID:
+        type: string
+        required: true
+        example: "209-49-6193"
+      nationalIDType:
+        type: string
+        required: true
+        example: "SSN"
+      address:
+        type: object
+        properties:
+          streetAddress:
+            type: string
+            required: true
+            example: "1600 Pennsylvania Avenue NW"
+          city:
+            type: string
+            required: true
+            example: "Washington"
+          state:
+            type: string
+            required: true
+            example: "DC"
+          postal:
+            type: string
+            required: true
+            example: "517325"
+          country:
+            type: string
+            required: true
+            example: "USA"
+
+  covid-case-response-datatypes:
+    type: object
+    properties:
+      caseID:
+        type: string
+        required: true
+        example: "3673673"
+
+  get-covid-cases-by-national-id-response:
+    type: array
+    items:
+      type: object
+      properties:
+        source:
+          type: string
+          required: true
+          example: "The johns hopkins hospital"
+        caseType:
+          type: string
+          required: true
+          example: "positive"
+        firstName:
+          type: string
+          required: true
+          example: "john"
+        lastName:
+          type: string
+          required: true
+          example: "nixon"
+        phone:
+          type: string
+          required: true
+          example: "9398267202"
+        email:
+          type: string
+          required: false
+          example: "jayasree@auropro.com"
+        dateOfBirth:
+          type: date-only
+          required: true
+          example: "2001-02-21"
+        nationalID:
+          type: string
+          required: true
+          example: "209-49-6193"
+        nationalIDType:
+          type: string
+          required: true
+          example: "SSN"
+        address:
+          type: object
+          properties:
+            streetAddress:
+              type: string
+              required: true
+              example: "1600 Pennsylvania Avenue NW"
+            city:
+              type: string
+              required: true
+              example: "Washington"
+            state:
+              type: string
+              required: true
+              example: "DC"
+            postal:
+              type: string
+              required: true
+              example: "517325"
+            country:
+              type: string
+              required: true
+              example: "USA"
+        createDate:
+          type: date-only
+          required: true
+          example: "2023-12-06"
+        updateDate:
+          type: date-only
+          required: true
+          example: "2023-12-06"
+
+  get-reports-response-datatypes:
+    type: array
+    items:
+      type: object
+      properties:
+        state:
+          type: string
+          required: true
+          example: "texas"
+        report:
+          type: object
+          properties:
+            total:
+              type: string
+              required: true
+              example: "345678"
+            positive:
+              type: string
+              required: true
+              example: "4566"
+            recovered:
+              type: string
+              required: true
+              example: "45667"
+            death:
+              type: string
+              required: true
+              example: "3445"
+            vaccinated:
+              type: string
+              required: true
+              example: "3456"  
+    
+
+
+
+
+    

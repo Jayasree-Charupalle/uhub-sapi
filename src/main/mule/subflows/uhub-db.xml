@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	
+	<sub-flow name="insert-covid-case" doc:id="33cb07c8-97cb-4d6e-84f7-5a2ae2c2ebb0" >
+		<logger level="INFO" doc:name="Start log" doc:id="05046c37-b0e3-43a6-af87-3a12c5bc9dec" message="transactionId: #[vars.transactionId], correlationId: #[vars.correlationId], message: before inserting into the database, payload:#[payload]"/>
+		<db:insert doc:name="insert-covid-case" doc:id="48a515ea-583f-432e-8739-5ff6c1e51f5d" config-ref="Database_Config" autoGenerateKeys="true">
+			<db:sql ><![CDATA[insert into covidcase (SOURCE,CASE_TYPE,FIRST_NAME,LAST_NAME,PHONE,EMAIL,DATE_OF_BIRTH,NATIONAL_ID,NATIONAL_ID_TYPE,STREET_ADDRESS,CITY,STATE,POSTAL,COUNTRY,CREATE_DATE,UPDATE_DATE,CREATED_BY,UPDATED_BY) values(:SOURCE,:CASE_TYPE,:FIRST_NAME,:LAST_NAME,:PHONE,:EMAIL,:DATE_OF_BIRTH,:NATIONAL_ID,:NATIONAL_ID_TYPE,:STREET_ADDRESS,:CITY,:STATE,:POSTAL,:COUNTRY,:CREATE_DATE,:UPDATE_DATE,:CREATED_BY,:UPDATED_BY);]]></db:sql>
+			<db:input-parameters ><![CDATA[#[payload]]]></db:input-parameters>
+			<db:auto-generated-keys-column-names >
+				<db:auto-generated-keys-column-name value="CASE_ID" />
+			</db:auto-generated-keys-column-names>
+		</db:insert>
+		<logger level="INFO" doc:name="End log" doc:id="8a7b0b36-cb3b-43d9-96be-f64e829c4a36" message="transactionId: #[vars.transactionId], correlationId: #[vars.correlationId], message: after inserting into the database, payload:#[payload]"/>
+	</sub-flow>
+	<sub-flow name="update-covid-case" doc:id="0c606585-8e3d-4f53-a012-686bf54bc8ed" >
+		<logger level="INFO" doc:name="Start log" doc:id="cf81a51b-e69f-4d4e-b448-0d7a60fcb235" message="transactionId: #[vars.transactionId], correlationId: #[vars.correlationId], message: before updating into the database, payload:#[payload]" />
+		<db:update doc:name="Update-covid-case" doc:id="c6c73bc1-9789-40ca-857e-b15a7463be37" config-ref="Database_Config">
+			<db:sql ><![CDATA[update covidcase set SOURCE= :SOURCE,CASE_TYPE= :CASE_TYPE,FIRST_NAME= :FIRST_NAME,LAST_NAME= :LAST_NAME,PHONE = :PHONE,EMAIL = :EMAIL,DATE_OF_BIRTH = :DATE_OF_BIRTH,NATIONAL_ID = :NATIONAL_ID,NATIONAL_ID_TYPE = :NATIONAL_ID_TYPE,STREET_ADDRESS= :STREET_ADDRESS,CITY = :CITY ,STATE = :STATE,POSTAL = :POSTAL,COUNTRY = :COUNTRY,CREATE_DATE = :CREATE_DATE,UPDATE_DATE= :UPDATE_DATE,CREATED_BY = :CREATED_BY,UPDATED_BY= :UPDATED_BY where CASE_ID = :CASE_ID]]></db:sql>
+			<db:parameter-types />
+			<db:input-parameters ><![CDATA[#[vars.covidcasePayload]]]></db:input-parameters>
+		</db:update>
+		<logger level="INFO" doc:name="End log" doc:id="ef53a848-a175-4d5d-8887-7664f8be6cb7" message="transactionId: #[vars.transactionId], correlationId: #[vars.correlationId], message: after updating into the database, payload:#[payload]" />
+	</sub-flow>
+	<sub-flow name="Fetch-covid-case-by-nationalId" doc:id="dfcc3fb0-6e55-4a77-8ce7-8908e950884d" >
+		<logger level="INFO" doc:name="Start log" doc:id="065b41b0-c768-4900-94aa-2bf20ddd84a3" message="transactionId: #[vars.transactionId], correlationId: #[vars.correlationId], message: before fetching the data in the  database, payload:#[payload]" />
+		<db:select doc:name="Fetch-covid-case" doc:id="b6cb9a22-c7c5-48d1-af60-f2308677e902" config-ref="Database_Config" target="originalPayload">
+			<db:sql ><![CDATA[select * from covidcase where NATIONAL_ID = :NATIONAL_ID;]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	"NATIONAL_ID": vars.NationalId
+}]]]></db:input-parameters>
+		</db:select>
+		<logger level="INFO" doc:name="End log" doc:id="f68e212c-61f9-42ea-aad0-a09b67616bfb" message="transactionId: #[vars.transactionId], correlationId: #[vars.correlationId], message: after updating into the database, payload:#[payload]" />
+	</sub-flow>
+</mule>

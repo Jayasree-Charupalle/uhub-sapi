@@ -1,0 +1,7 @@
+#%RAML 1.0 Trait
+  usage: apply this trait to ensure  api consumers are sending a transaction id for end to end tracking of transactions
+  headers:
+    x-transaction-id:
+      type: string
+      required: false
+      description: transaction id to maintain over apis

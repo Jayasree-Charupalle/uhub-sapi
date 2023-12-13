@@ -1,0 +1,7 @@
+{
+  "code": 503,
+  "message": "Service Unavailable",
+  "description": "error response code indicates that the server is not ready to handle the request",
+  "dateTime": "2023-12-06T06:34:02.889282Z",
+  "transactionId": "95b28bd3-04b8-4d6e-a467-faaa051cea70"
+}

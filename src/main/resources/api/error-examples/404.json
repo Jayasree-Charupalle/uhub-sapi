@@ -1,0 +1,7 @@
+{
+  "code": 404,
+  "message": "Not Found",
+  "description": "status code indicates that the resource is missing",
+  "dateTime": "2023-12-06T06:34:02.889282Z",
+  "transactionId": "95b28bd3-04b8-4d6e-a467-faaa051cea70"
+}

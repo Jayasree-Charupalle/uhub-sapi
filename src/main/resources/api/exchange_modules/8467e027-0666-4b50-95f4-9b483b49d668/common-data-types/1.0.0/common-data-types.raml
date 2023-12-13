@@ -1,0 +1,23 @@
+#%RAML 1.0 Library
+usage: used for common data types across all domains
+
+types:
+  errorType:
+    description: this type is used to provide detailed information about the error occured in a generic manner
+    type: object
+    properties:
+      code:
+        type: integer
+        required: true
+      message:
+        type: string
+        required: true
+      description:
+        type: string
+        required: false
+      dateTime:
+        type: datetime
+        required: true
+      transactionId:
+        type: string
+        required: true
